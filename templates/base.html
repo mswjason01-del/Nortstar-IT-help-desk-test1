@@ -1,4 +1,121 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{% block title %}Northstar Help Desk{% endblock %}</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet"></head>
-<body><aside><a class="brand" href="{{ url_for('index') }}"><span>✦</span> northstar<small>HELP DESK</small></a><nav><a href="{{ url_for('index') }}">⌂ Overview</a><a href="{{ url_for('tickets') }}">▤ All tickets</a><a href="{{ url_for('new_ticket') }}">＋ New request</a></nav><div class="sidebar-note"><b>IT Support Portal</b><p>Track every request from first report to resolution.</p></div></aside><main><header><div><p class="eyebrow">INTERNAL IT OPERATIONS</p><h1>{% block heading %}Help Desk{% endblock %}</h1></div><a class="button" href="{{ url_for('new_ticket') }}">+ Submit a ticket</a></header>{% with messages = get_flashed_messages(with_categories=true) %}{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}{% endwith %}{% block content %}{% endblock %}</main></body></html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1"
+    >
+
+    <title>
+        {% block title %}Northstar Help Desk{% endblock %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+</head>
+
+<body>
+
+    <aside>
+
+        <a class="brand" href="{{ url_for('index') }}">
+
+            <span>✦</span>
+
+            northstar
+
+            <small>HELP DESK</small>
+
+        </a>
+
+        <nav>
+
+            <a href="{{ url_for('index') }}">
+                ⌂ Overview
+            </a>
+
+            <a href="{{ url_for('tickets') }}">
+                ▤ All tickets
+            </a>
+
+            <a href="{{ url_for('new_ticket') }}">
+                ＋ New request
+            </a>
+
+        </nav>
+
+        <div class="sidebar-note">
+
+            <b>IT Support Portal</b>
+
+            <p>
+                Track every request from first report to resolution.
+            </p>
+
+        </div>
+
+    </aside>
+
+    <main>
+
+        <header>
+
+            <div>
+
+                <p class="eyebrow">
+                    INTERNAL IT OPERATIONS
+                </p>
+
+                <h1>
+                    {% block heading %}Help Desk{% endblock %}
+                </h1>
+
+            </div>
+
+            <a
+                class="button"
+                href="{{ url_for('new_ticket') }}"
+            >
+                + Submit a ticket
+            </a>
+
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% for category, message in messages %}
+
+                <div class="flash {{ category }}">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        {% endwith %}
+
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
+
+</body>
+
+</html>
