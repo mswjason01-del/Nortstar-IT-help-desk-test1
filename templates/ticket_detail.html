@@ -1,1 +1,218 @@
-{% extends 'base.html' %}{% block title %}Ticket #{{ ticket.id }} · Northstar Help Desk{% endblock %}{% block heading %}Ticket #{{ '%04d'|format(ticket.id) }}{% endblock %}{% block content %}<div class="detail-grid"><section class="panel ticket-main"><a class="back" href="{{ url_for('tickets') }}">← Back to tickets</a><div class="ticket-title"><div><p class="eyebrow">{{ ticket.category }}</p><h2>{{ ticket.title }}</h2></div><em class="status {{ ticket.status|lower|replace(' ', '-') }}">{{ ticket.status }}</em></div><div class="description"><h3>Issue description</h3><p>{{ ticket.description }}</p></div><div class="timeline"><h3>Activity</h3><div class="event"><b>Ticket submitted</b><span>{{ ticket.requester_name }} · {{ ticket.created_at }}</span></div>{% for note in notes %}<div class="event note"><b>{{ note.author }}</b><p>{{ note.body }}</p><span>{{ note.created_at }}</span></div>{% endfor %}</div></section><aside class="ticket-side"><section class="panel facts"><h3>Request details</h3><div><span>Requester</span><b>{{ ticket.requester_name }}</b><small>{{ ticket.requester_email }}</small></div><div><span>Priority</span><em class="priority {{ ticket.priority|lower }}">{{ ticket.priority }}</em></div><div><span>Assigned to</span><b>{{ ticket.assignee }}</b></div><div><span>Last updated</span><b>{{ ticket.updated_at }}</b></div></section><form method="post" action="{{ url_for('manage_ticket', ticket_id=ticket.id) }}" class="panel manage"><h3>IT workspace</h3><label>Status<select name="status">{% for s in ['Open','In Progress','Waiting on Employee','Resolved'] %}<option {% if ticket.status==s %}selected{% endif %}>{{ s }}</option>{% endfor %}</select></label><label>Assign to<select name="assignee">{% for t in ['Unassigned','Maya Chen','Jordan Williams','Alex Rivera'] %}<option {% if ticket.assignee==t %}selected{% endif %}>{{ t }}</option>{% endfor %}</select></label><label>Internal note<textarea name="note" rows="4" placeholder="Add troubleshooting steps or an update…"></textarea></label><button class="button">Save changes</button></form></aside></div>{% endblock %}
+{% extends 'base.html' %}
+
+{% block title %}
+    Ticket #{{ ticket.id }} · Northstar Help Desk
+{% endblock %}
+
+{% block heading %}
+    Ticket #{{ '%04d'|format(ticket.id) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="detail-grid">
+
+    <section class="panel ticket-main">
+
+        <a class="back" href="{{ url_for('tickets') }}">
+            ← Back to tickets
+        </a>
+
+        <div class="ticket-title">
+
+            <div>
+                <p class="eyebrow">{{ ticket.category }}</p>
+                <h2>{{ ticket.title }}</h2>
+            </div>
+
+            <em class="status {{ ticket.status|lower|replace(' ', '-') }}">
+                {{ ticket.status }}
+            </em>
+
+        </div>
+
+        <div class="description">
+
+            <h3>Issue description</h3>
+
+            <p>
+                {{ ticket.description }}
+            </p>
+
+        </div>
+
+        <div class="timeline">
+
+            <h3>Activity</h3>
+
+            <div class="event">
+
+                <b>Ticket submitted</b>
+
+                <span>
+                    {{ ticket.requester_name }} · {{ ticket.created_at }}
+                </span>
+
+            </div>
+
+            {% for note in notes %}
+
+                <div class="event note">
+
+                    <b>{{ note.author }}</b>
+
+                    <p>
+                        {{ note.body }}
+                    </p>
+
+                    <span>
+                        {{ note.created_at }}
+                    </span>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <aside class="ticket-side">
+
+        <section class="panel facts">
+
+            <h3>Request details</h3>
+
+            <div>
+
+                <span>Requester</span>
+
+                <b>
+                    {{ ticket.requester_name }}
+                </b>
+
+                <small>
+                    {{ ticket.requester_email }}
+                </small>
+
+            </div>
+
+            <div>
+
+                <span>Priority</span>
+
+                <em class="priority {{ ticket.priority|lower }}">
+                    {{ ticket.priority }}
+                </em>
+
+            </div>
+
+            <div>
+
+                <span>Assigned to</span>
+
+                <b>
+                    {{ ticket.assignee }}
+                </b>
+
+            </div>
+
+            <div>
+
+                <span>Last updated</span>
+
+                <b>
+                    {{ ticket.updated_at }}
+                </b>
+
+            </div>
+
+        </section>
+
+
+        <form
+            method="post"
+            action="{{ url_for('manage_ticket', ticket_id=ticket.id) }}"
+            class="panel manage"
+        >
+
+            <h3>IT workspace</h3>
+
+            <label>
+                Status
+
+                <select name="status">
+
+                    {% for s in [
+                        'Open',
+                        'In Progress',
+                        'Waiting on Employee',
+                        'Resolved'
+                    ] %}
+
+                        <option
+                            {% if ticket.status == s %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ s }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </label>
+
+
+            <label>
+                Assign to
+
+                <select name="assignee">
+
+                    {% for t in [
+                        'Unassigned',
+                        'Maya Chen',
+                        'Jordan Williams',
+                        'Alex Rivera'
+                    ] %}
+
+                        <option
+                            {% if ticket.assignee == t %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ t }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </label>
+
+
+            <label>
+                Internal note
+
+                <textarea
+                    name="note"
+                    rows="4"
+                    placeholder="Add troubleshooting steps or an update…"
+                ></textarea>
+
+            </label>
+
+
+            <button class="button">
+                Save changes
+            </button>
+
+        </form>
+
+    </aside>
+
+</div>
+
+{% endblock %}
