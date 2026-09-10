@@ -1,1 +1,93 @@
-<div class="table-wrap"><table><thead><tr><th>Ticket</th><th>Requester</th><th>Priority</th><th>Status</th><th>Assigned to</th><th>Updated</th></tr></thead><tbody>{% for ticket in tickets|default(recent) %}<tr onclick="location.href='{{ url_for('ticket_detail', ticket_id=ticket.id) }}'" tabindex="0"><td><b>#{{ '%04d'|format(ticket.id) }}</b><span>{{ ticket.title }}</span></td><td>{{ ticket.requester_name }}<small>{{ ticket.category }}</small></td><td><em class="priority {{ ticket.priority|lower }}">{{ ticket.priority }}</em></td><td><em class="status {{ ticket.status|lower|replace(' ', '-') }}">{{ ticket.status }}</em></td><td>{{ ticket.assignee }}</td><td>{{ ticket.updated_at }}</td></tr>{% else %}<tr><td colspan="6" class="empty">No tickets match these filters.</td></tr>{% endfor %}</tbody></table></div>
+<div class="table-wrap">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Ticket</th>
+                <th>Requester</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Assigned to</th>
+                <th>Updated</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for ticket in tickets|default(recent) %}
+
+                <tr
+                    onclick="location.href='{{ url_for('ticket_detail', ticket_id=ticket.id) }}'"
+                    tabindex="0"
+                >
+
+                    <td>
+
+                        <b>
+                            #{{ '%04d'|format(ticket.id) }}
+                        </b>
+
+                        <span>
+                            {{ ticket.title }}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        {{ ticket.requester_name }}
+
+                        <small>
+                            {{ ticket.category }}
+                        </small>
+
+                    </td>
+
+                    <td>
+
+                        <em class="priority {{ ticket.priority|lower }}">
+                            {{ ticket.priority }}
+                        </em>
+
+                    </td>
+
+                    <td>
+
+                        <em class="status {{ ticket.status|lower|replace(' ', '-') }}">
+                            {{ ticket.status }}
+                        </em>
+
+                    </td>
+
+                    <td>
+                        {{ ticket.assignee }}
+                    </td>
+
+                    <td>
+                        {{ ticket.updated_at }}
+                    </td>
+
+                </tr>
+
+            {% else %}
+
+                <tr>
+
+                    <td colspan="6" class="empty">
+                        No tickets match these filters.
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
