@@ -64,12 +64,12 @@ def init_db():
         now = datetime.now().strftime("%Y-%m-%d %H:%M")
         examples = [
             ("VPN connection fails", "I cannot connect to the company VPN from home. It says authentication failed.", "Network", "High", "In Progress", "Jason Coc", "cocjason01@northstar.local", "Jadiel Pop"),
-            ("Request access to Finance Drive", "Please add me to the Finance Q3 planning folder.", "Access & Accounts", "Medium", "Open", "Noah Davis", "noah@northstar.local", "Unassigned"),
-            ("Laptop battery draining quickly", "My laptop drops from 100% to 20% within an hour while unplugged.", "Hardware", "Low", "Resolved", "Emma Wilson", "emma@northstar.local", "Jordan Williams"),
+            ("Request access to Finance Drive", "Please add me to the Finance Q3 planning folder.", "Access & Accounts", "Medium", "Open", "Albert Coy", "albert@northstar.local", "Unassigned"),
+            ("Laptop battery draining quickly", "My laptop drops from 100% to 20% within an hour while unplugged.", "Hardware", "Low", "Resolved", "Rannie Choco", "r02choco@northstar.local", "Eva Coc"),
         ]
         for title, description, category, priority, status, name, email, assignee in examples:
             db.execute("INSERT INTO tickets (title,description,category,priority,status,requester_name,requester_email,assignee,created_at,updated_at,resolved_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)", (title, description, category, priority, status, name, email, assignee, now, now, now if status == "Resolved" else None))
-        db.execute("INSERT INTO notes (ticket_id,author,body,created_at) VALUES (1,?,?,?)", ("Maya Chen", "Checked VPN gateway logs. Resetting the remote access profile.", now))
+        db.execute("INSERT INTO notes (ticket_id,author,body,created_at) VALUES (1,?,?,?)", ("Jadiel Pop", "Checked VPN gateway logs. Resetting the remote access profile.", now))
     db.commit()
 
 
