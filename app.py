@@ -63,7 +63,7 @@ def init_db():
     if db.execute("SELECT COUNT(*) FROM tickets").fetchone()[0] == 0:
         now = datetime.now().strftime("%Y-%m-%d %H:%M")
         examples = [
-            ("VPN connection fails", "I cannot connect to the company VPN from home. It says authentication failed.", "Network", "High", "In Progress", "Olivia Martin", "olivia@northstar.local", "Maya Chen"),
+            ("VPN connection fails", "I cannot connect to the company VPN from home. It says authentication failed.", "Network", "High", "In Progress", "Jason Coc", "cocjason01@northstar.local", "Jadiel Pop"),
             ("Request access to Finance Drive", "Please add me to the Finance Q3 planning folder.", "Access & Accounts", "Medium", "Open", "Noah Davis", "noah@northstar.local", "Unassigned"),
             ("Laptop battery draining quickly", "My laptop drops from 100% to 20% within an hour while unplugged.", "Hardware", "Low", "Resolved", "Emma Wilson", "emma@northstar.local", "Jordan Williams"),
         ]
